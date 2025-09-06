@@ -4,17 +4,18 @@ while True:
     print(Fore.BLUE +
     """"
     Welcome to personal assistant,
+    
     ██████╗ ██╗      █████╗ ███╗   ██╗██╗██╗  ██╗
     ██╔══██╗██║     ██╔══██╗████╗  ██║██║╚██╗██╔╝
     ██████╔╝██║     ███████║██╔██╗ ██║██║ ╚███╔╝ 
     ██╔═══╝ ██║     ██╔══██║██║╚██╗██║██║ ██╔██╗ 
     ██║     ███████╗██║  ██║██║ ╚████║██║██╔╝ ██╗
     ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
-
+    
     Designed to declutter you time and simplify your day with daily essential tool that enhances your productivity!
     Features:
             1- Activity Tracking,
-            2- Budget Management,
+            2- ,
             3- To Do List,
             4- Pomodoro Timer,
             5- Minigame.
@@ -53,6 +54,6 @@ while True:
             quit = input("")
 
             if (quit == "q"):
-                break;
+                break
     elif (choice == "q"):
         exit()
