@@ -24,36 +24,37 @@ while True:
     if (choice == "1"):
         while True:
             quit = input("")
-
             if (quit == "q"):
+
                 break
 
     elif (choice == "2"):
         while True:
             quit = input("")
-
             if (quit == "q"):
+
                 break
+
 
     elif (choice == "3"):
         while True:
             quit = input("")
-
             if (quit == "q"):
+
                 break
 
     elif (choice == "4"):
         while True:
             quit = input("")
-
             if (quit == "q"):
+
                 break
 
     elif (choice == "5"):
         while True:
             quit = input("")
-
             if (quit == "q"):
+
                 break
     elif (choice == "q"):
         exit()
