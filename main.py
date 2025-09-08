@@ -12,15 +12,15 @@ init(autoreset=True)
 while True:
     print(Fore.BLUE +
     """
-Welcome to personal assistant,
-
+Welcome to
+    
 ██████╗ ██╗      █████╗ ███╗   ██╗██╗██╗  ██╗
 ██╔══██╗██║     ██╔══██╗████╗  ██║██║╚██╗██╔╝
 ██████╔╝██║     ███████║██╔██╗ ██║██║ ╚███╔╝ 
 ██╔═══╝ ██║     ██╔══██║██║╚██╗██║██║ ██╔██╗ 
 ██║     ███████╗██║  ██║██║ ╚████║██║██╔╝ ██╗
 ╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
-
+    
 Designed to declutter you time and simplify your day with daily essential tool that enhances your productivity!
 Features:
     1- Activity Tracking,
@@ -29,22 +29,22 @@ Features:
     4- Pomodoro Timer,
     5- Minigame.
     """)
-    choice = input(Fore.GREEN + "Select a feature (1-5):")
+    choice = input(Fore.GREEN + "Select a feature (1-5): ")
 # ----------------------------------------------------------------------------------------------------------------------
-    if (choice == "1"):
+    if choice == "1":
         while True:
-            if (__name__ == '__main__'):
+            if __name__ == '__main__':
                 logging.basicConfig(filename='dev.log',filemode='a',
                     level= logging.INFO,
                     format= '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt= '%Y-%m-%d %H:%M:%S'
                 )
                 input_paths = input("Enter the path/s you want to monitor: ")
-                if (input_paths == "q"):
+                if input_paths == "q":
                     break
                 input_paths.split(',')
                 input_paths = [p.strip() for p in input_paths if os.path.isdir(p.strip())]
-                if (not input_paths):
+                if not input_paths:
                     print (Fore.RED + "Invalid Path.")
                 else:
                     event_handler = LoggingEventHandler()
@@ -56,7 +56,7 @@ Features:
                         print(Fore.GREEN + "Monitoring started! all changes will be logged, Check dev.log for saved data!")
                         while True:
                             inp = input(Fore.BLUE + "-> ")
-                            if (inp == "q"):
+                            if inp == "q":
                                 break
                             time.sleep(1)
                     except Exception as e:
@@ -65,33 +65,30 @@ Features:
                         observer.stop()
                         observer.join()
 # ----------------------------------------------------------------------------------------------------------------------
-    elif (choice == "2"):
+    elif choice == "2":
+        file_name = input(Fore.GREEN + "Enter the name (or a part of it) of the file you're searching for: ")
+        print()
+# ----------------------------------------------------------------------------------------------------------------------
+    elif choice == "3":
         while True:
-            quit = input("")
-            if (quit == "q"):
+            qu = input("")
+            if qu == "q":
 
                 break
 # ----------------------------------------------------------------------------------------------------------------------
-    elif (choice == "3"):
+    elif choice == "4":
         while True:
-            quit = input("")
-            if (quit == "q"):
+            qu = input("")
+            if qu == "q":
 
                 break
 # ----------------------------------------------------------------------------------------------------------------------
-    elif (choice == "4"):
+    elif choice == "5":
         while True:
-            quit = input("")
-            if (quit == "q"):
+            qu = input("")
+            if qu == "q":
 
                 break
 # ----------------------------------------------------------------------------------------------------------------------
-    elif (choice == "5"):
-        while True:
-            quit = input("")
-            if (quit == "q"):
-
-                break
-# ----------------------------------------------------------------------------------------------------------------------
-    elif (choice == "q"):
+    elif choice == "q":
         exit()
