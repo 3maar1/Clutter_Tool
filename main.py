@@ -30,7 +30,7 @@ Features:
     5- Minigame.
     """)
     choice = input(Fore.GREEN + "Select a feature (1-5): ")
-# ----------------------------------------------------------------------------------------------------------------------
+# Option One ----------------------------------------------------------------------------------------------------------------------
     if choice == "1":
         while True:
             if __name__ == '__main__':
@@ -64,31 +64,68 @@ Features:
                     finally:
                         observer.stop()
                         observer.join()
-# ----------------------------------------------------------------------------------------------------------------------
+# Options Two ----------------------------------------------------------------------------------------------------------------------
     elif choice == "2":
-        file_name = input(Fore.GREEN + "Enter the name (or a part of it) of the file you're searching for: ")
-        print()
-# ----------------------------------------------------------------------------------------------------------------------
+        while True:
+            fuzzdir = input(Fore.GREEN + "Please specify the directory path to search in: ")
+            if (fuzzdir == 'q'):
+                break
+            fuzztype = input(Fore.GREEN + "Enter the type of the file/s you're searching for: ")
+            fuzzname = input(Fore.GREEN + "Enter the closest matching file name: ")
+            fuzztype = fuzztype.split(" ")
+            for roots,dirs, files in os.walk(fuzzdir):
+                for name in files:
+                    if fuzztype == [""] or name.endswith(tuple(fuzztype)):
+                        if fuzzname == "" or fuzz.token_sort_ratio(fuzzname.lower(), name.lower()) >50:
+                            print (Fore.BLUE + "Found: " + os.path.join(roots, name))
+# Option Three ----------------------------------------------------------------------------------------------------------------------
     elif choice == "3":
         while True:
-            qu = input("")
-            if qu == "q":
-
+            num = input(Fore.GREEN + "Enter the number of tasks you want to store: ")
+            if num == "q":
                 break
-# ----------------------------------------------------------------------------------------------------------------------
+            tasks = {}
+            if (num.isdigit()==False):
+                continue
+            for i in range(int(num)):
+                Task = input(Fore.GREEN + f"Enter the {i+1}st task in your list: ")
+                desc = input(Fore.GREEN + "Enter a short describtion for your task: ")
+                Dead = input(Fore.GREEN + "Enter the deadline for the task: ")
+                IsDone = input(Fore.GREEN + f"Is it done? ")
+                tasks[Task] = {
+                    'Desciption': desc,
+                    'Deadline': Dead,
+                    'State' : IsDone
+                }
+                file_name = "Todo.json"
+                with open(file_name,'w') as f:
+                    json.dump(tasks,f,indent=4)
+            print(Fore.BLUE + "Successfully saved your list to Todo.json!")
+
+# Option Four ----------------------------------------------------------------------------------------------------------------------
     elif choice == "4":
         while True:
-            qu = input("")
-            if qu == "q":
-
+            timer = float(input(Fore.GREEN + "Enter your work time (in minutes): "))
+            timer *=60
+            breaker = float(input(Fore.GREEN + "Enter your break time (in minutes): "))
+            breaker *= 60
+            while True:
+                start = input(Fore.RED + "Press Enter to start the timer (or q to exit): ")
+                if (start == 'q'):
+                    break
+                time.sleep(timer)
+                print(Fore.BLUE + f"Time's up! take a rest for {breaker / 60} minutes...")
+                time.sleep(breaker)
+                print(Fore.YELLOW + f"Time's up! back to work ;)")
+            if timer == "q":
                 break
-# ----------------------------------------------------------------------------------------------------------------------
+# Option Five ----------------------------------------------------------------------------------------------------------------------
     elif choice == "5":
         while True:
             qu = input("")
             if qu == "q":
 
                 break
-# ----------------------------------------------------------------------------------------------------------------------
+# Quit ----------------------------------------------------------------------------------------------------------------------
     elif choice == "q":
         exit()
