@@ -1,3 +1,5 @@
+from math import floor
+
 from colorama import init,Fore
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
@@ -27,7 +29,8 @@ Features:
     2- Fuzzy Searching for Files,
     3- To Do List,
     4- Pomodoro Timer,
-    5- Minigame.
+    5- Password Manager,
+    6- Minigame.
     """)
     choice = input(Fore.GREEN + "Select a feature (1-5): ")
 # Option One ----------------------------------------------------------------------------------------------------------------------
@@ -91,11 +94,11 @@ Features:
                 Task = input(Fore.GREEN + f"Enter the {i+1}st task in your list: ")
                 desc = input(Fore.GREEN + "Enter a short description for your task: ")
                 Dead = input(Fore.GREEN + "Enter the deadline for the task: ")
-                IsDone = input(Fore.GREEN + f"Is it done? ")
+                state = input(Fore.GREEN + f"Is it done? ")
                 tasks[Task] = {
                     'Description': desc,
                     'Deadline': Dead,
-                    'State' : IsDone
+                    'State' : state
                 }
                 file_name = "Todo.json"
                 with open(file_name,'w') as f:
@@ -108,20 +111,50 @@ Features:
             cho = input(Fore.GREEN + "Press Enter to start a new timer (or q to quit): ")
             if cho == "q":
                 break
-            timer = int(input(Fore.GREEN + "Enter your work time (in minutes): "))
+            timer = float(input(Fore.GREEN + "Enter your work time (in minutes): "))
             timer *=60
+            tim = timer
             breaker = float(input(Fore.GREEN + "Enter your break time (in minutes): "))
             breaker *= 60
+            bre=breaker
             while True:
                 start = input(Fore.RED + "Press Enter to start the timer (or q to exit): ")
                 if start == 'q':
                     break
-                time.sleep(timer)
-                print(Fore.BLUE + f"Time's up! take a rest for {breaker / 60} minutes...")
-                time.sleep(breaker)
-                print(Fore.YELLOW + f"Time's up! back to work ;)")
+                while tim!=0:
+                    if tim<=60:
+                        time.sleep(1)
+                        tim-=1
+                        print(Fore.RED + f"{tim} second/s left")
+                    elif tim<=3600 and tim>60:
+                        time.sleep(1)
+                        tim-=1
+                        print(Fore.YELLOW + f"{floor(tim/60)} minute/s left")
+                    elif tim>3600:
+                        time.sleep(1)
+                        tim-=1
+                        print(Fore.GREEN + f"{floor(tim/3600)} hour/s left")
+                print(Fore.BLUE + f"Time's up! take a rest for {breaker / 60} minute/s...")
+                while bre!=0:
+                    if bre <=60:
+                        time.sleep(1)
+                        bre-=1
+                        print(Fore.RED + f"{bre} second/s left")
+                    elif bre>60 and bre <=3600:
+                        time.sleep(1)
+                        bre-=1
+                        print(Fore.YELLOW + f"{floor(bre/60.0)} minute/s left")
+                    elif bre >3600:
+                        time.sleep(1)
+                        bre-=1
+                        print(Fore.GREEN + f"{floor(bre/3600.0)} hour/s left")
+                print(Fore.BLUE + f"Time's up! back to work ;) ")
 # Option Five ----------------------------------------------------------------------------------------------------------------------
     elif choice == "5":
+        while True:
+            print("")
+# Option Six ----------------------------------------------------------------------------------------------------------------------
+    elif choice == "6":
         print (Fore.BLUE + "Let's play rock paper scissors! ")
         while True:
             play = input(Fore.GREEN + "Type rock, paper or scissors: ")
