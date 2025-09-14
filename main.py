@@ -30,7 +30,8 @@ Features:
     3- To Do List,
     4- Pomodoro Timer,
     5- File Organizer,
-    6- Minigame.
+    6- Password Manager,
+    7- Minigame.
     """)
     choice = input(Fore.GREEN + "Select a feature (1-6): ")
 # Option One ----------------------------------------------------------------------------------------------------------------------
@@ -168,6 +169,28 @@ Features:
                     print(Fore.BLUE + f"Successfully organized the directory: '{path}'.")
 # Option Six ----------------------------------------------------------------------------------------------------------------------
     elif choice == "6":
+        while True:
+            num = input(Fore.GREEN + "Enter the number of passwords you want to store: ")
+            if num == "q":
+                break
+            file_name = "Passwords.json"
+            passes = json.load(open(file_name)) if os.path.exists(file_name) else {}
+            if not num.isdigit():
+                continue
+            for i in range(int(num)):
+                web = input(Fore.GREEN + "Enter the name of the website: ")
+                user = input(Fore.GREEN + "Enter the username/email address: ")
+                passw = input(Fore.RED + "Enter the password: ")
+                passes[web] = {
+                    'Username/Email': user,
+                    'Password': passw
+                }
+            with open(file_name, 'w') as f:
+                json.dump(passes, f, indent=4)
+            print(Fore.BLUE + """Successfully saved your passwords to Passwords.json! 
+                              (Psst, you can add more passwords without the need to rewrite all the previous ones!)""")
+# Option Seven ----------------------------------------------------------------------------------------------------------------------
+    elif choice == "7":
         print (Fore.BLUE + "Let's play rock paper scissors! ")
         while True:
             play = input(Fore.GREEN + "Type rock, paper or scissors: ")
