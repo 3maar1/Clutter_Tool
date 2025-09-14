@@ -3,7 +3,6 @@ from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
 import os
 import json
-import sys
 import time
 import logging
 from fuzzywuzzy import fuzz
@@ -60,23 +59,23 @@ Features:
                                 break
                             time.sleep(1)
                     except Exception as e:
-                        print(Fore.RED + "An Error Occured.")
+                        print(Fore.RED + "An Error Occurred.")
                     finally:
                         observer.stop()
                         observer.join()
 # Options Two ----------------------------------------------------------------------------------------------------------------------
     elif choice == "2":
         while True:
-            fuzzdir = input(Fore.GREEN + "Please specify the directory path to search in: ")
-            if (fuzzdir == 'q'):
+            fuzz_dir = input(Fore.GREEN + "Please specify the directory path to search in: ")
+            if fuzz_dir == 'q':
                 break
-            fuzztype = input(Fore.GREEN + "Enter the type of the file/s you're searching for: ")
-            fuzzname = input(Fore.GREEN + "Enter the closest matching file name: ")
-            fuzztype = fuzztype.split(" ")
-            for roots,dirs, files in os.walk(fuzzdir):
+            fuzz_type = input(Fore.GREEN + "Enter the type of the file/s you're searching for: ")
+            fuzz_name = input(Fore.GREEN + "Enter the closest matching file name: ")
+            fuzz_type = fuzz_type.split(" ")
+            for roots,dirs, files in os.walk(fuzz_dir):
                 for name in files:
-                    if fuzztype == [""] or name.endswith(tuple(fuzztype)):
-                        if fuzzname == "" or fuzz.token_sort_ratio(fuzzname.lower(), name.lower()) >50:
+                    if fuzz_type == [""] or name.endswith(tuple(fuzz_type)):
+                        if fuzz_name == "" or fuzz.token_sort_ratio(fuzz_name.lower(), name.lower()) >50:
                             print (Fore.BLUE + "Found: " + os.path.join(roots, name))
 # Option Three ----------------------------------------------------------------------------------------------------------------------
     elif choice == "3":
@@ -85,15 +84,15 @@ Features:
             if num == "q":
                 break
             tasks = {}
-            if (num.isdigit()==False):
+            if not num.isdigit():
                 continue
             for i in range(int(num)):
                 Task = input(Fore.GREEN + f"Enter the {i+1}st task in your list: ")
-                desc = input(Fore.GREEN + "Enter a short describtion for your task: ")
+                desc = input(Fore.GREEN + "Enter a short description for your task: ")
                 Dead = input(Fore.GREEN + "Enter the deadline for the task: ")
                 IsDone = input(Fore.GREEN + f"Is it done? ")
                 tasks[Task] = {
-                    'Desciption': desc,
+                    'Description': desc,
                     'Deadline': Dead,
                     'State' : IsDone
                 }
@@ -111,7 +110,7 @@ Features:
             breaker *= 60
             while True:
                 start = input(Fore.RED + "Press Enter to start the timer (or q to exit): ")
-                if (start == 'q'):
+                if start == 'q':
                     break
                 time.sleep(timer)
                 print(Fore.BLUE + f"Time's up! take a rest for {breaker / 60} minutes...")
