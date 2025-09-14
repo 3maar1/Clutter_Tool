@@ -5,6 +5,7 @@ import os
 import json
 import time
 import logging
+import random
 from fuzzywuzzy import fuzz
 
 init(autoreset=True)
@@ -104,7 +105,10 @@ Features:
 # Option Four ----------------------------------------------------------------------------------------------------------------------
     elif choice == "4":
         while True:
-            timer = float(input(Fore.GREEN + "Enter your work time (in minutes): "))
+            cho = input(Fore.GREEN + "Press Enter to start a new timer (or q to quit): ")
+            if cho == "q":
+                break
+            timer = int(input(Fore.GREEN + "Enter your work time (in minutes): "))
             timer *=60
             breaker = float(input(Fore.GREEN + "Enter your break time (in minutes): "))
             breaker *= 60
@@ -116,15 +120,22 @@ Features:
                 print(Fore.BLUE + f"Time's up! take a rest for {breaker / 60} minutes...")
                 time.sleep(breaker)
                 print(Fore.YELLOW + f"Time's up! back to work ;)")
-            if timer == "q":
-                break
 # Option Five ----------------------------------------------------------------------------------------------------------------------
     elif choice == "5":
+        print (Fore.BLUE + "Let's play rock paper scissors! ")
         while True:
-            qu = input("")
-            if qu == "q":
-
+            play = input(Fore.GREEN + "Type rock, paper or scissors: ")
+            comp = random.choice(["rock","paper","scissors"])
+            if play == "rock" and comp == "scissors" or play == "scissors" and comp == "paper" or play == "paper" and comp == "rock":
+                print(Fore.YELLOW + f"You win! my choice was {comp}")
+            elif comp == "rock" and play == "scissors" or comp == "scissors" and play == "paper" or comp == "paper" and play == "rock":
+                print(Fore.RED + f"You lose, my choice was {comp}")
+            elif comp == play:
+                print(Fore.BLUE + f"It's a tie, we both chose {comp}")
+            elif play == 'q':
                 break
+            else:
+                print(Fore.BLUE + f"Uhh... what is {play}?")
 # Quit ----------------------------------------------------------------------------------------------------------------------
     elif choice == "q":
         exit()
