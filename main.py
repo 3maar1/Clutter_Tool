@@ -1,5 +1,5 @@
 from math import floor
-
+import shutil
 from colorama import init,Fore
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
@@ -29,10 +29,10 @@ Features:
     2- Fuzzy Searching for Files,
     3- To Do List,
     4- Pomodoro Timer,
-    5- Password Manager,
+    5- File Organizer,
     6- Minigame.
     """)
-    choice = input(Fore.GREEN + "Select a feature (1-5): ")
+    choice = input(Fore.GREEN + "Select a feature (1-6): ")
 # Option One ----------------------------------------------------------------------------------------------------------------------
     if choice == "1":
         while True:
@@ -126,7 +126,7 @@ Features:
                         time.sleep(1)
                         tim-=1
                         print(Fore.RED + f"{tim} second/s left")
-                    elif tim<=3600 and tim>60:
+                    elif 60<tim<=3600:
                         time.sleep(1)
                         tim-=1
                         print(Fore.YELLOW + f"{floor(tim/60)} minute/s left")
@@ -140,7 +140,7 @@ Features:
                         time.sleep(1)
                         bre-=1
                         print(Fore.RED + f"{bre} second/s left")
-                    elif bre>60 and bre <=3600:
+                    elif 3600>=bre>60:
                         time.sleep(1)
                         bre-=1
                         print(Fore.YELLOW + f"{floor(bre/60.0)} minute/s left")
@@ -152,7 +152,20 @@ Features:
 # Option Five ----------------------------------------------------------------------------------------------------------------------
     elif choice == "5":
         while True:
-            print("")
+            path = input(Fore.GREEN +"Enter the path for the directory you want to organize: ")
+            if path == 'q':
+                break
+            else:
+                files = os.listdir(path)
+                for file in files:
+                    filename,extension = os.path.splitext(file)
+                    extension = extension[1:]
+                    if os.path.exists(path + '/' + extension):
+                        shutil.move(path + '/' + file, path + '/' + extension + '/' + file)
+                    else:
+                        os.makedirs(path + '/' + extension)
+                        shutil.move(path + '/' + file, path + '/' + extension + '/' + file)
+                    print(Fore.BLUE + f"Successfully organized the directory: '{path}'.")
 # Option Six ----------------------------------------------------------------------------------------------------------------------
     elif choice == "6":
         print (Fore.BLUE + "Let's play rock paper scissors! ")
